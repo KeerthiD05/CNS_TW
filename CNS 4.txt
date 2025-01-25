@@ -1,0 +1,38 @@
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class DiffieHellman {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Accepting values of P and G
+        System.out.print("Enter the value of P (a prime number): ");
+        BigInteger P = sc.nextBigInteger();
+
+        System.out.print("Enter the value of G (a primitive root modulo P): ");
+        BigInteger G = sc.nextBigInteger();
+
+        // Accepting private keys a and b
+        System.out.print("Enter the private key a: ");
+        BigInteger a = sc.nextBigInteger();
+
+        System.out.print("Enter the private key b: ");
+        BigInteger b = sc.nextBigInteger();
+
+        // Calculating public keys
+        BigInteger A = G.modPow(a, P); // A = G^a mod P
+        BigInteger B = G.modPow(b, P); // B = G^b mod P
+
+        // Calculating shared secret keys
+        BigInteger sharedKeyA = B.modPow(a, P); // Shared key from A's perspective
+        BigInteger sharedKeyB = A.modPow(b, P); // Shared key from B's perspective
+
+        // Displaying the results
+        System.out.println("Public key A (G^a mod P): " + A);
+        System.out.println("Public key B (G^b mod P): " + B);
+        System.out.println("Shared key calculated by A: " + sharedKeyA);
+        System.out.println("Shared key calculated by B: " + sharedKeyB);
+
+        sc.close();
+    }
+}
