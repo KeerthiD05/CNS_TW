@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class PasswordValidator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the password: ");
+        String password = scanner.nextLine();
+
+        if (isValidPassword(password)) {
+            System.out.println("Password is strong!");
+        } 
+    }
+
+    private static boolean isValidPassword(String password) {
+        // Check length
+        if (password.length() < 8) {
+            System.out.println("Invalid password: Length should be at least 8 characters");
+            return false;
+        }
+
+        // Check if it contains only numbers, alphabets, or special characters
+        if (password.matches("[0-9]+") || password.matches("[a-zA-Z]+") || password.matches("[^a-zA-Z0-9]+")) {
+            System.out.println("Weak password: Contains only numbers, alphabets, or special characters");
+            return false;
+        }
+
+        // Check if it contains a combination of numbers and alphabets, or alphabets and special characters, or special characters and numbers
+        if (password.matches(".*[0-9].*") && password.matches(".*[a-zA-Z].*") && password.matches(".*[^a-zA-Z0-9].*")) {
+            System.out.println("Strong password: Contains numbers, alphabets, and special characters");
+            return true;
+        } else {
+            System.out.println("Moderate password: Contains a combination of numbers and alphabets, or alphabets and special characters, or special characters and numbers");
+            return false;
+        }
+    }
+}
